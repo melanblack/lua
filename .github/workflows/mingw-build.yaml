@@ -38,4 +38,6 @@ jobs:
         run: bash ./package.sh
       - name: Upload
         run: |
+          VERSION=$(cat VERSION)
+          PACKAGE_NAME="lua${VERSION}.zip"
           aws s3 cp "$PACKAGE_NAME" "s3://${{ env.AWS_BUCKET_NAME }}/lua/$PACKAGE_NAME"
