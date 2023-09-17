@@ -38,4 +38,4 @@ jobs:
         run: bash ./package.sh
       - name: Upload
         run: |
-          aws s3 cp "$PACKAGE_NAME" "s3://${{ env.AWS_BUCKET_NAME }}/lua/$PACKAGE_NAME
+          aws s3 cp "$PACKAGE_NAME" "s3://${{ env.AWS_BUCKET_NAME }}/lua/$PACKAGE_NAME"
