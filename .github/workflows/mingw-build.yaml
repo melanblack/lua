@@ -3,10 +3,10 @@ name: Lua Windows build with MinGW
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   AWS_BUCKET_NAME: "melanblack-public"
