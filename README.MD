@@ -1,4 +1,4 @@
-# LUA 5.4.6 built with cmake
+# LUA 5.4.6
 
 This is Lua 5.4.6, released on 02 May 2023.
 

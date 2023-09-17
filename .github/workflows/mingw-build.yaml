@@ -1,0 +1,41 @@
+name: Lua Windows build with MinGW
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  AWS_BUCKET_NAME: "melanblack-public"
+
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: eu-west-3
+          role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
+          role-session-name: GitHubActions
+      - name: Install MinGW
+        run: sudo apt-get install -y make zip mingw-w64
+      - name: Build
+        run: make mingw -j
+      - name: package
+        run: bash ./package.sh
+      - name: Upload
+        run: |
+          aws s3 cp "$PACKAGE_NAME" "s3://${{ env.AWS_BUCKET_NAME }}/$PACKAGE_NAME

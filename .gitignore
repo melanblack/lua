@@ -1,0 +1,6 @@
+build/
+cmakebuild-*/
+*.o
+*.dll
+*.exe
+*.a
