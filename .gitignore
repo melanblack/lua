@@ -4,3 +4,7 @@ cmakebuild-*/
 *.dll
 *.exe
 *.a
+src/lua
+src/luac
+src/liblua.a
+*.zip

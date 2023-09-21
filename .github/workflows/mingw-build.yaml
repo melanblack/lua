@@ -11,7 +11,6 @@ on:
 env:
   AWS_BUCKET_NAME: "melanblack-public"
 
-
 permissions:
   id-token: write
   contents: read
@@ -33,11 +32,9 @@ jobs:
       - name: Install MinGW
         run: sudo apt-get install -y make zip mingw-w64
       - name: Build
-        run: make mingw -j
-      - name: package
-        run: bash ./package.sh
+        run: ./build.sh
       - name: Upload
         run: |
-          VERSION=$(cat VERSION)
-          PACKAGE_NAME="lua${VERSION}.zip"
-          aws s3 cp "$PACKAGE_NAME" "s3://${{ env.AWS_BUCKET_NAME }}/lua/$PACKAGE_NAME"
+          for f in *.zip; do
+            aws s3 cp "$f" "s3://${{ env.AWS_BUCKET_NAME }}/lua/$f"
+          done
