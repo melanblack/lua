@@ -30,9 +30,9 @@ jobs:
           role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
           role-session-name: GitHubActions
       - name: Install MinGW
-        run: sudo apt-get install -y make zip mingw-w64
+        run: sudo apt-get install -y make zip mingw-w64 gcc
       - name: Build
-        run: ./build.sh
+        run: bash build.sh
       - name: Upload
         run: |
           for f in *.zip; do
